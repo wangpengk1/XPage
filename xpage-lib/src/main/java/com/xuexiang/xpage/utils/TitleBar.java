@@ -21,11 +21,14 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -643,10 +646,13 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
      * @param index  the position at which to add the action
      */
     public View addAction(Action action, int index) {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-                LayoutParams.MATCH_PARENT);
         View view = inflateAction(action);
-        mRightLayout.addView(view, index, params);
+//        if(action instanceof ImageAction)
+//        {
+//            params = new LinearLayout.LayoutParams(Utils.dp2px(getContext(),36),Utils.dp2px(getContext(),36));
+//            params.gravity = Gravity.CENTER_VERTICAL;
+//        };
+        mRightLayout.addView(view, index,action.layouParam());
         return view;
     }
 
@@ -839,6 +845,9 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
          * @return 右边间距
          */
         int rightPadding();
+
+        LinearLayout.LayoutParams layouParam();
+
     }
 
     /**
@@ -871,6 +880,14 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         public int rightPadding() {
             return 0;
         }
+
+        @Override
+        public LinearLayout.LayoutParams layouParam() {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(100,100);
+            params.gravity = Gravity.CENTER_VERTICAL;
+            return  params;
+        }
+
     }
 
     /**
@@ -906,6 +923,12 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         @Override
         public int rightPadding() {
             return 0;
+        }
+
+        @Override
+        public LinearLayout.LayoutParams layouParam() {
+            return new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+                    LayoutParams.MATCH_PARENT);
         }
     }
 

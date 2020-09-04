@@ -1,13 +1,16 @@
 package com.xuexiang.xpagedemo.fragment;
 
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.base.XPageContainerListFragment;
 import com.xuexiang.xpage.core.PageOption;
 import com.xuexiang.xpage.enums.CoreAnim;
 import com.xuexiang.xpage.utils.TitleBar;
+import com.xuexiang.xpagedemo.R;
 import com.xuexiang.xutil.common.ClickUtils;
 
 /**
@@ -35,12 +38,21 @@ public class MainFragment extends XPageContainerListFragment {
 
     @Override
     protected TitleBar initTitleBar() {
-        return super.initTitleBar().setLeftClickListener(new View.OnClickListener() {
+        TitleBar titleBar = super.initTitleBar().setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ClickUtils.exitBy2Click();
             }
         });
+
+        titleBar.addAction(new TitleBar.ImageAction(R.drawable.date) {
+            @Override
+            public void performAction(View view) {
+
+            }
+        });
+
+        return titleBar;
     }
 
     @Override

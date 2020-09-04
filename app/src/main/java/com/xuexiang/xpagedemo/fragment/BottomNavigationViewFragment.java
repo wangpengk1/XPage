@@ -32,6 +32,16 @@ public class BottomNavigationViewFragment extends XPageFragment implements ViewP
 
     BottomNavigationView bottomNavigation;
 
+
+    @Override
+    protected void initArgs() {
+        super.initArgs();
+        toolbar = mRootView.findViewById(R.id.toolbar);
+        viewPager = mRootView.findViewById(R.id.view_pager);
+        fab = mRootView.findViewById(R.id.fab);
+        bottomNavigation = mRootView.findViewById(R.id.bottom_navigation);
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_bottom_navigationview;
@@ -55,10 +65,6 @@ public class BottomNavigationViewFragment extends XPageFragment implements ViewP
 
     @Override
     protected void initViews() {
-        toolbar = mRootView.findViewById(R.id.toolbar);
-        viewPager = mRootView.findViewById(R.id.view_pager);
-        fab = mRootView.findViewById(R.id.fab);
-        bottomNavigation = mRootView.findViewById(R.id.bottom_navigation);
         FragmentAdapter<XPageFragment> adapter = new FragmentAdapter<>(getChildFragmentManager());
         for (String title : titles) {
             adapter.addFragment(SimpleListFragment.newInstance(title), title);

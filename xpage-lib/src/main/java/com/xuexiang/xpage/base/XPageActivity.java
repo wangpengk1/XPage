@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Parcelable;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -45,6 +48,8 @@ import java.util.List;
  * @since 2018/5/24 下午3:36
  */
 public class XPageActivity extends AppCompatActivity implements CoreSwitcher {
+
+
     /**
      * 应用中所有XPageActivity的引用
      */
