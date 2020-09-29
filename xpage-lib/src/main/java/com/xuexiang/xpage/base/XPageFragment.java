@@ -37,6 +37,10 @@ import java.lang.ref.WeakReference;
  * @since 2018/5/24 下午3:49
  */
 public abstract class XPageFragment extends Fragment {
+
+    protected TitleBar mTitleBar;
+    private RandomBackgroundInterface mRandomBGListener;
+
     /**
      * 所在activity
      */
@@ -60,6 +64,17 @@ public abstract class XPageFragment extends Fragment {
      * 根布局
      */
     protected View mRootView;
+
+
+    public void setRandomBackgroundListener(RandomBackgroundInterface listener)
+    {
+        mRandomBGListener = listener;
+    }
+
+    public RandomBackgroundInterface getRandomBackgroundListener()
+    {
+        return mRandomBGListener;
+    }
 
     /**
      * 设置该接口用于返回结果
@@ -534,6 +549,16 @@ public abstract class XPageFragment extends Fragment {
 
     //======================生命周期=======================//
 
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden && mRandomBGListener!=null)
+        {
+            mRandomBGListener.updateBackground();
+        }
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -588,6 +613,10 @@ public abstract class XPageFragment extends Fragment {
         mRootView = inflateView(inflater, container);
         initArgs();
         initPage();
+        if(mRandomBGListener!=null)
+        {
+            mRandomBGListener.randomBackground(mTitleBar);
+        }
         return mRootView;
     }
 
@@ -615,12 +644,14 @@ public abstract class XPageFragment extends Fragment {
      * 初始化标题，可进行重写
      */
     protected TitleBar initTitleBar() {
-        return TitleUtils.addTitleBarDynamic((ViewGroup) mRootView, getPageTitle(), new View.OnClickListener() {
+        mTitleBar =  TitleUtils.addTitleBarDynamic((ViewGroup) mRootView, getPageTitle(), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popToBack();
             }
         });
+
+        return mTitleBar;
     }
 
     @Override
