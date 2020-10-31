@@ -663,7 +663,10 @@ public abstract class XPageFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        if(mRandomBGListener!=null)
         mRandomBGListener.onDestroy();
+
         mRandomBGListener = null;
     }
 
