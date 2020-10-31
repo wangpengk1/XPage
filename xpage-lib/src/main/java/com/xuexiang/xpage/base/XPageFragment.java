@@ -656,7 +656,6 @@ public abstract class XPageFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-
         super.onDestroyView();
 
     }
@@ -664,6 +663,8 @@ public abstract class XPageFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mRandomBGListener.onDestroy();
+        mRandomBGListener = null;
     }
 
     /**

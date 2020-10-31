@@ -7,4 +7,6 @@ public interface RandomBackgroundInterface
     void randomBackground(TitleBar titleBar);
 
     void updateBackground();
+
+    void onDestroy();
 }
